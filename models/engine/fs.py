@@ -3,6 +3,12 @@
 """
 from models.base_model import BaseModel
 import json
+from models.users import User
+from models.orders import Order
+from models.order_item import OrderItem
+from models.menu_items import MenuItem
+from models.recipes import Recipe
+from models.inventory_items import InventoryItem
 
 
 class FileStorage:
@@ -12,18 +18,27 @@ class FileStorage:
     __file = "objects.json"
     __objects = {}
 
-    def all(self):
+    def all(self, cls=None):
         """
         return dictionary that holds all objects or objects of
         cls if cls is provided
         """
-        return type(self).__objects.copy()
+        if cls:
+            obj = {}
+            all_obj = self.__objects
+            for key in list(all_obj):
+                key_split = key.split(".")
+                cls_name = key_split[0]
+                if cls_name == cls.__name__:
+                    obj.update({key: all_obj[key]})
+            return obj
+        return self.__objects.copy()
 
     def delete(self, obj=None):
         if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
-            if key in type(self).__objects.keys():
-                del type(self).__objects[key]
+            if key in self.__objects.keys():
+                del self.__objects[key]
 
     def new(self, obj):
         """
@@ -33,7 +48,7 @@ class FileStorage:
             obj (instance): new object to add
         """
         if obj:
-            type(self).__objects["{}.{}".format(type(obj).__name__,
+            self.__objects["{}.{}".format(type(obj).__name__,
                                  obj.id)] = obj
 
     def save(self):
@@ -42,9 +57,9 @@ class FileStorage:
 
         """
         try:
-            with open(type(self).__file, "w") as file:
+            with open(self.__file, "w") as file:
                 temp = {}
-                temp.update(type(self).__objects)
+                temp.update(self.__objects)
                 for key, value in temp.items():
                     temp[key] = value.to_dict()
                 json.dump(temp, file, indent=4)
@@ -53,14 +68,21 @@ class FileStorage:
 
     def reload(self):
 
-        classes = {"BaseModel": BaseModel}
+        classes = {"BaseModel": BaseModel,
+                    'User': User,
+                    'Order': Order,
+                    'OrderItem': OrderItem,
+                    'MenuItem': MenuItem,
+                    'Recipe': Recipe,
+                    'InventoryItem': InventoryItem
+        }
 
         try:
             temp = {}
-            with open(type(self).__file, "r") as file:
+            with open(self.__file, "r") as file:
                 temp = json.load(file)
             for key, value in temp.items():
-                type(self).__objects[key] = classes[value["__class__"]](**value)
+                self.__objects[key] = classes[value["__class__"]](**value)
         except (FileNotFoundError, json.JSONDecodeError):
             pass
 
