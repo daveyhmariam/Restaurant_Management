@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - K&D Restaurant</title>
+    <link rel="stylesheet" href="../static/styles/menu.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <nav class="nav">
+                <ul>
+                    <li><a href="/">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z" fill="#000"/>
+                        </svg>
+                        Home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="{{ url_for('site.menu') }}">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 12H21V14H3V12ZM3 6H21V8H3V6ZM3 18H21V20H3V18Z" fill="#000"/>
+                            </svg>
+                            Menu</a>
+                        <div class="dropdown-content">
+                            <a href="/menu/appetizers">Appetizers</a>
+                            <a href="/menu/main_courses">Main Courses</a>
+                            <a href="/menu/desserts">Desserts</a>
+                            <a href="/menu/beverages">Beverages</a>
+                        </div>
+                    </li>
+                    <li><a href="/about">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V11H13V17ZM13 9H11V7H13V9Z" fill="#000"/>
+                        </svg>
+                        About Us</a>
+                    </li>
+                    <li><a href="/contact">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 8V20H3V8H21M21 6H3C1.9 6 1 6.9 1 8V20C1 21.1 1.9 22 3 22H21C22.1 22 23 21.1 23 20V8C23 6.9 22.1 6 21 6M20 4L12 10L4 4H20Z" fill="#000"/>
+                        </svg>
+                        Contact</a>
+                    </li>
+                    <li class="logout"><a href="{{ url_for('site.logout') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="16" height="16" fill="white">
+                            <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 18.33c-4.6 0-8.33-3.73-8.33-8.33S5.4 1.67 10 1.67 18.33 5.4 18.33 10 14.6 18.33 10 18.33zM10 3.67c-3.5 0-6.33 2.83-6.33 6.33S6.5 16.33 10 16.33 16.33 13.5 16.33 10 13.5 3.67 10 3.67zm0 10c-2.03 0-3.67-1.64-3.67-3.67S7.97 6.33 10 6.33s3.67 1.64 3.67 3.67S12.03 13.67 10 13.67z"/>
+                        </svg> 
+                        Logout
+                    </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <form method="post" action="/logout" class="logout-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            </form>
+        </header>
+
+        <main>
+            <section class="menu-categories">
+                <h2>Categories</h2>
+                <ul>
+                    {% for category in menu %}
+                    <li><a href="#{{ category }}">{{ category }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <section class="menu-items">
+                {% for category, dishes in menu.items() %}
+                <h2 id="{{ category }}">{{ category }}</h2>
+                <div class="menu-items-container">
+                    {% for dish in dishes %}
+                    <div class="menu-item">
+                        <input type="checkbox" id="dish{{ dish.id }}" name="dish" value="{{ dish.id }}">
+                        <label for="dish{{ dish.id }}">{{ dish.name }}</label>
+                        <img src="../static/images/{{ dish.picture }}" alt="{{ dish.name }}">
+                        <p>{{ dish.description }}</p>
+                        <p>Price: {{ dish.price }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <meta name="csrf-token" content="{{ csrf_token() }}">
+                <button id="orderButton">Order</button>
+                <div id="noDishSelectedMessage">Please select at least one dish.</div>
+            </section>
+        </main>
+
+    </div>
+
+    <script>
+        document.getElementById("orderButton").addEventListener("click", function() {
+            var selectedDishes = [];
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            checkboxes.forEach(function(checkbox) {
+                selectedDishes.push(checkbox.value);
+            });
+            
+            if (selectedDishes.length === 0) {
+                var message = document.getElementById("noDishSelectedMessage");
+                message.style.display = "block";
+                setTimeout(function() {
+                    message.style.display = "none";
+                }, 2000);
+                return;
+            }
+            
+            // Fetch CSRF token from the meta tag
+            var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            fetch('/place_order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken  // Include CSRF token in the headers
+                },
+                body: JSON.stringify({ selectedDishes: selectedDishes })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // For example, show a success message
+                // Uncheck all checkboxes
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.checked = false;
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>
