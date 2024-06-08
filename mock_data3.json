@@ -1,0 +1,170 @@
+{
+    "menus": [
+        {
+            "name": "Doro Wat",
+            "description": "Spicy chicken stew with hard-boiled eggs, served with injera",
+            "price": 12.99,
+            "category": "Main Course",
+            "recipes": [
+                {
+                    "ingredient": "Chicken",
+                    "quantity": 1,
+                    "unit": "whole"
+                },
+                {
+                    "ingredient": "Berbere",
+                    "quantity": 2,
+                    "unit": "spoonfuls"
+                },
+                {
+                    "ingredient": "Onions",
+                    "quantity": 2,
+                    "unit": "cups"
+                },
+                {
+                    "ingredient": "Garlic",
+                    "quantity": 1,
+                    "unit": "clove"
+                },
+                {
+                    "ingredient": "Ginger",
+                    "quantity": 1,
+                    "unit": "teaspoon"
+                },
+                {
+                    "ingredient": "Eggs",
+                    "quantity": 4,
+                    "unit": "whole"
+                },
+                {
+                    "ingredient": "Injera",
+                    "quantity": 4,
+                    "unit": "pieces"
+                }
+            ]
+        },
+        {
+            "name": "Kitfo",
+            "description": "Minced raw beef seasoned with spices and served with injera or kocho",
+            "price": 15.99,
+            "category": "Main Course",
+            "recipes": [
+                {
+                    "ingredient": "Beef",
+                    "quantity": 500,
+                    "unit": "grams"
+                },
+                {
+                    "ingredient": "Mitmita",
+                    "quantity": 1,
+                    "unit": "spoonful"
+                },
+                {
+                    "ingredient": "Niter Kibbeh",
+                    "quantity": 2,
+                    "unit": "spoonfuls"
+                },
+                {
+                    "ingredient": "Injera",
+                    "quantity": 4,
+                    "unit": "pieces"
+                }
+            ]
+        },
+        {
+            "name": "Shiro",
+            "description": "Chickpea stew with a blend of spices, served with injera",
+            "price": 9.99,
+            "category": "Main Course",
+            "recipes": [
+                {
+                    "ingredient": "Chickpea Flour",
+                    "quantity": 1,
+                    "unit": "cup"
+                },
+                {
+                    "ingredient": "Berbere",
+                    "quantity": 1,
+                    "unit": "spoonful"
+                },
+                {
+                    "ingredient": "Onion",
+                    "quantity": 1,
+                    "unit": "cup"
+                },
+                {
+                    "ingredient": "Garlic",
+                    "quantity": 1,
+                    "unit": "clove"
+                },
+                {
+                    "ingredient": "Niter Kibbeh",
+                    "quantity": 2,
+                    "unit": "spoonfuls"
+                },
+                {
+                    "ingredient": "Injera",
+                    "quantity": 4,
+                    "unit": "pieces"
+                }
+            ]
+        }
+    ],
+    "inventory": [
+        {
+            "name": "Chicken",
+            "quantity": 10,
+            "unit": "whole"
+        },
+        {
+            "name": "Berbere",
+            "quantity": 500,
+            "unit": "grams"
+        },
+        {
+            "name": "Onions",
+            "quantity": 100,
+            "unit": "cups"
+        },
+        {
+            "name": "Garlic",
+            "quantity": 50,
+            "unit": "cloves"
+        },
+        {
+            "name": "Ginger",
+            "quantity": 20,
+            "unit": "teaspoons"
+        },
+        {
+            "name": "Eggs",
+            "quantity": 100,
+            "unit": "whole"
+        },
+        {
+            "name": "Injera",
+            "quantity": 200,
+            "unit": "pieces"
+        },
+        {
+            "name": "Beef",
+            "quantity": 10000,
+            "unit": "grams"
+        },
+        {
+            "name": "Mitmita",
+            "quantity": 200,
+            "unit": "grams"
+        },
+        {
+            "name": "Niter Kibbeh",
+            "quantity": 500,
+            "unit": "grams"
+        },
+        {
+            "name": "Chickpea Flour",
+            "quantity": 50,
+            "unit": "cups"
+        }
+    ]
+}

@@ -1,0 +1,165 @@
+{
+    "menus": [
+        {
+            "name": "Dabo",
+            "description": "Traditional Ethiopian bread, often enjoyed with honey or butter",
+            "price": 3.99,
+            "category": "Side Dish",
+            "recipes": [
+                {
+                    "ingredient": "Flour",
+                    "quantity": 2,
+                    "unit": "cups"
+                },
+                {
+                    "ingredient": "Yeast",
+                    "quantity": 1,
+                    "unit": "teaspoon"
+                },
+                {
+                    "ingredient": "Sugar",
+                    "quantity": 2,
+                    "unit": "tablespoons"
+                },
+                {
+                    "ingredient": "Salt",
+                    "quantity": 1,
+                    "unit": "teaspoon"
+                },
+                {
+                    "ingredient": "Water",
+                    "quantity": 1,
+                    "unit": "cup"
+                }
+            ]
+        },
+        {
+            "name": "Atayef",
+            "description": "Ethiopian stuffed pancake, often filled with nuts and served with syrup",
+            "price": 5.99,
+            "category": "Dessert",
+            "recipes": [
+                {
+                    "ingredient": "Flour",
+                    "quantity": 1,
+                    "unit": "cup"
+                },
+                {
+                    "ingredient": "Milk",
+                    "quantity": 1,
+                    "unit": "cup"
+                },
+                {
+                    "ingredient": "Egg",
+                    "quantity": 1,
+                    "unit": "whole"
+                },
+                {
+                    "ingredient": "Sugar",
+                    "quantity": 2,
+                    "unit": "tablespoons"
+                },
+                {
+                    "ingredient": "Baking Powder",
+                    "quantity": 1,
+                    "unit": "teaspoon"
+                },
+                {
+                    "ingredient": "Ground Nuts",
+                    "quantity": 1,
+                    "unit": "cup"
+                },
+                {
+                    "ingredient": "Syrup",
+                    "quantity": 1,
+                    "unit": "cup"
+                }
+            ]
+        },
+        {
+            "name": "Telba",
+            "description": "Ethiopian flaxseed drink, often consumed as a healthy beverage",
+            "price": 2.99,
+            "category": "Beverage",
+            "recipes": [
+                {
+                    "ingredient": "Flaxseeds",
+                    "quantity": 1,
+                    "unit": "cup"
+                },
+                {
+                    "ingredient": "Water",
+                    "quantity": 4,
+                    "unit": "cups"
+                },
+                {
+                    "ingredient": "Honey",
+                    "quantity": 2,
+                    "unit": "tablespoons"
+                }
+            ]
+        }
+    ],
+    "inventory": [
+        {
+            "name": "Flour",
+            "quantity": 100,
+            "unit": "cups"
+        },
+        {
+            "name": "Yeast",
+            "quantity": 50,
+            "unit": "teaspoons"
+        },
+        {
+            "name": "Sugar",
+            "quantity": 200,
+            "unit": "tablespoons"
+        },
+        {
+            "name": "Salt",
+            "quantity": 100,
+            "unit": "teaspoons"
+        },
+        {
+            "name": "Water",
+            "quantity": 500,
+            "unit": "cups"
+        },
+        {
+            "name": "Milk",
+            "quantity": 50,
+            "unit": "cups"
+        },
+        {
+            "name": "Egg",
+            "quantity": 100,
+            "unit": "whole"
+        },
+        {
+            "name": "Baking Powder",
+            "quantity": 50,
+            "unit": "teaspoons"
+        },
+        {
+            "name": "Ground Nuts",
+            "quantity": 50,
+            "unit": "cups"
+        },
+        {
+            "name": "Syrup",
+            "quantity": 20,
+            "unit": "cups"
+        },
+        {
+            "name": "Flaxseeds",
+            "quantity": 50,
+            "unit": "cups"
+        },
+        {
+            "name": "Honey",
+            "quantity": 100,
+            "unit": "tablespoons"
+        }
+    ]
+}

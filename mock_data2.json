@@ -1,0 +1,151 @@
+{
+    "menus": [
+      {
+        "name": "Spaghetti Bolognese",
+        "description": "Classic Italian pasta with a rich meat sauce",
+        "price": 12.99,
+        "category": "Main Course",
+        "recipes": [
+          {
+            "ingredient": "Spaghetti",
+            "quantity": 100,
+            "unit": "grams"
+          },
+          {
+            "ingredient": "Ground Beef",
+            "quantity": 200,
+            "unit": "grams"
+          },
+          {
+            "ingredient": "Tomato Sauce",
+            "quantity": 150,
+            "unit": "ml"
+          },
+          {
+            "ingredient": "Onion",
+            "quantity": 1,
+            "unit": "pcs"
+          }
+        ]
+      },
+      {
+        "name": "Caesar Salad",
+        "description": "Crispy romaine lettuce with Caesar dressing, croutons, and parmesan cheese",
+        "price": 7.99,
+        "category": "Appetizer",
+        "recipes": [
+          {
+            "ingredient": "Romaine Lettuce",
+            "quantity": 100,
+            "unit": "grams"
+          },
+          {
+            "ingredient": "Caesar Dressing",
+            "quantity": 50,
+            "unit": "ml"
+          },
+          {
+            "ingredient": "Croutons",
+            "quantity": 20,
+            "unit": "grams"
+          },
+          {
+            "ingredient": "Parmesan Cheese",
+            "quantity": 30,
+            "unit": "grams"
+          }
+        ]
+      },
+      {
+        "name": "Chicken Curry",
+        "description": "Spicy chicken curry with coconut milk and aromatic spices",
+        "price": 13.99,
+        "category": "Main Course",
+        "recipes": [
+          {
+            "ingredient": "Chicken Breast",
+            "quantity": 200,
+            "unit": "grams"
+          },
+          {
+            "ingredient": "Coconut Milk",
+            "quantity": 200,
+            "unit": "ml"
+          },
+          {
+            "ingredient": "Curry Powder",
+            "quantity": 2,
+            "unit": "tablespoons"
+          },
+          {
+            "ingredient": "Garlic",
+            "quantity": 2,
+            "unit": "cloves"
+          }
+        ]
+      }
+    ],
+    "inventory": [
+      {
+        "name": "Spaghetti",
+        "quantity": 500,
+        "unit": "grams"
+      },
+      {
+        "name": "Ground Beef",
+        "quantity": 1000,
+        "unit": "grams"
+      },
+      {
+        "name": "Tomato Sauce",
+        "quantity": 1000,
+        "unit": "ml"
+      },
+      {
+        "name": "Onion",
+        "quantity": 50,
+        "unit": "pcs"
+      },
+      {
+        "name": "Romaine Lettuce",
+        "quantity": 300,
+        "unit": "grams"
+      },
+      {
+        "name": "Caesar Dressing",
+        "quantity": 200,
+        "unit": "ml"
+      },
+      {
+        "name": "Croutons",
+        "quantity": 100,
+        "unit": "grams"
+      },
+      {
+        "name": "Parmesan Cheese",
+        "quantity": 100,
+        "unit": "grams"
+      },
+      {
+        "name": "Chicken Breast",
+        "quantity": 1000,
+        "unit": "grams"
+      },
+      {
+        "name": "Coconut Milk",
+        "quantity": 500,
+        "unit": "ml"
+      },
+      {
+        "name": "Curry Powder",
+        "quantity": 100,
+        "unit": "grams"
+      },
+      {
+        "name": "Garlic",
+        "quantity": 50,
+        "unit": "cloves"
+      }
+    ]
+  }
+  
