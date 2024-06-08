@@ -146,6 +146,8 @@ class DB_Storage():
             obj = self.__session.query(MenuItem).filter_by(order_id=order_id)
             return obj
 
+    def rollback(self):
+        self.__session.rollback()
 
 if __name__ == "__main__":
     from models import storage
