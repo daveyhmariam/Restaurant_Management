@@ -1,0 +1,7 @@
+CREATE USER 'dev'@'localhost' IDENTIFIED BY 'Daveyhmdave123L';
+
+GRANT ALL PRIVILEGES ON *.* TO 'dev'@'localhost';
+
+FLUSH PRIVILEGES;
+
+CREATE DATABASE IF NOT EXISTS dev_db;
