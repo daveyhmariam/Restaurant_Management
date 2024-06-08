@@ -10,10 +10,17 @@ from sqlalchemy.ext.declarative import declarative_base
 from models.base_model import Base
 from models.users import User
 from models.orders import Order
-from models.order_item import OrderItem
+from models.order_items import OrderItem
 from models.menu_items import MenuItem
 from models.recipes import Recipe
 from models.inventory_items import InventoryItem
+import models
+
+
+all_models = {'User': User, 'Order': Order,
+                'OrderItem': OrderItem, 'MenuItem': MenuItem,
+                'Recipe': Recipe, 'InventoryItem': InventoryItem
+             }
 
 
 class DB_Storage():
@@ -43,9 +50,7 @@ class DB_Storage():
         Args:
             cls (Class, optional): class of entity model. Defaults to None.
         """
-        all_models = {'User': User, 'Order': Order,
-                      'OrderItem': OrderItem, 'MenuItem': MenuItem,
-                      'Recipe': Recipe, 'InventoryItem': InventoryItem}
+
         dic = {}
         for cl in all_models.keys():
             if cls is None or cls is cl or cls is all_models[cl]:
@@ -90,8 +95,59 @@ class DB_Storage():
         Session = scoped_session(session_fact)
         self.__session = Session()
 
-    def close(self):
+
+
+    def get(self, cls, id=None):
+        """get object based on class and id
+
+        Args:
+            cls(class): type of object
+            id (str): id of object
         """
-        removes session by calling remove() method on self.__session
+        if cls not in all_models.values():
+            return None
+        all_classes = models.storage.all(cls)
+        for value in all_classes.values():
+            if (value.id == id):
+                return value
+
+    def count(self, cls=None):
+        """Count the number of objects
+
+        Args:
+            cls (class, optional): class of object.
+                                    Defaults to None.
+
+        Returns:
+            int: Number of objects
         """
-        self.__session.remove()
+        all_classes = all_models.values()
+
+        if not cls:
+            count = 0
+            for cl in all_classes:
+                count += len(models.storage.all(cl).values())
+        else:
+            count = len(models.storage.all(cls).values())
+
+        return count
+    def query(self, cls, attr):
+        if cls:
+            if attr:
+               obj = self.__session.query(cls).filter_by(email=attr).first()
+               return obj
+    def query_orders(self, user_id):
+        if user_id:
+            obj = self.__session.query(Order).filter_by(user_id=user_id)
+            return obj
+
+    def query_order_items(self, order_id):
+        if order_id:
+            obj = self.__session.query(MenuItem).filter_by(order_id=order_id)
+            return obj
+
+
+if __name__ == "__main__":
+    from models import storage
+    al = storage.query(User, "daveyhm@gmail.com")
+    print(al)

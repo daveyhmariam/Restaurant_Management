@@ -5,10 +5,21 @@ from models.base_model import BaseModel
 import json
 from models.users import User
 from models.orders import Order
-from models.order_item import OrderItem
+from models.order_items import OrderItem
 from models.menu_items import MenuItem
 from models.recipes import Recipe
 from models.inventory_items import InventoryItem
+import models
+
+
+all_models = {"BaseModel": BaseModel,
+           'User': User,
+           'Order': Order,
+           'OrderItem': OrderItem,
+           'MenuItem': MenuItem,
+           'Recipe': Recipe,
+           'InventoryItem': InventoryItem
+           }
 
 
 class FileStorage:
@@ -25,7 +36,7 @@ class FileStorage:
         """
         if cls:
             obj = {}
-            all_obj = self.__objects
+            all_obj = self.__objects.copy()
             for key in list(all_obj):
                 key_split = key.split(".")
                 cls_name = key_split[0]
@@ -49,7 +60,7 @@ class FileStorage:
         """
         if obj:
             self.__objects["{}.{}".format(type(obj).__name__,
-                                 obj.id)] = obj
+                                          obj.id)] = obj
 
     def save(self):
         """
@@ -68,23 +79,51 @@ class FileStorage:
 
     def reload(self):
 
-        classes = {"BaseModel": BaseModel,
-                    'User': User,
-                    'Order': Order,
-                    'OrderItem': OrderItem,
-                    'MenuItem': MenuItem,
-                    'Recipe': Recipe,
-                    'InventoryItem': InventoryItem
-        }
-
         try:
             temp = {}
             with open(self.__file, "r") as file:
                 temp = json.load(file)
             for key, value in temp.items():
-                self.__objects[key] = classes[value["__class__"]](**value)
+                self.__objects[key] = all_models[value["__class__"]](**value)
         except (FileNotFoundError, json.JSONDecodeError):
             pass
 
     def close(self):
+        """Deserialize stored objects
+        """
         self.reload()
+
+    def get(self, cls, id=None):
+        """get object based on class and id
+
+        Args:
+            cls(class): type of object
+            id (str): id of object
+        """
+        if cls not in all_models.values():
+            return None
+        all_classes = models.storage.all(cls)
+        for value in all_classes.values():
+            if (value.id == id):
+                return value
+
+    def count(self, cls=None):
+        """Count the number of objects
+
+        Args:
+            cls (class, optional): class of object.
+                                    Defaults to None.
+
+        Returns:
+            int: Number of objects
+        """
+        all_classes = all_models.values()
+
+        if not cls:
+            count = 0
+            for cl in all_classes:
+                count += len(models.storage.all(cl).values())
+        else:
+            count = len(models.storage.all(cls).values())
+
+        return count
