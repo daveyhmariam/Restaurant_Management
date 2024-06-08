@@ -1,0 +1,197 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+}
+
+header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none; /* Remove the background color */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo svg {
+    margin-right: 10px;
+}
+
+.container {
+    background-image: url('../images/home.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 1000px;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end; /* Align navigation to the right */
+    flex: 1;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav ul li {
+    margin-right: 20px;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.nav ul li a svg {
+    margin-right: 5px;
+}
+
+.hero {
+
+    background-size: cover;
+    color: #fff;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 40px;
+    opacity: 0.7;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+.featured-dishes {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.dish {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.dish img {
+    margin: 50px;
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.contact {
+    background-color: #333;
+    color: #fff;
+    padding: 4px 0;
+    text-align: center;
+}
+
+.content-wrapper {
+    text-align: center;
+    max-height: 100px; /* Adjusted to fit the content properly */
+    
+}
+
+.content-wrapper h2 a{
+    color: cyan;
+    margin: 50px;
+}
+
+.content-wrapper p {
+    margin: 5px;
+    color: chartreuse;
+}
+
+footer {
+    background-color: #333;
+    opacity: 0.5;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* home.css */
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav ul li {
+    position: relative;
+}
+
+.nav ul li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.nav ul li .dropbtn {
+    cursor: pointer;
+}
+
+.nav ul li .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.nav ul li .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.nav ul li .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.nav ul li:hover .dropdown-content {
+    display: block;
+}
