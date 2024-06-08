@@ -136,18 +136,20 @@ def place_order():
         return jsonify({"message": str(e)}), 500
 
 
-@site.route("/pending_orders")
+@site.route("/pending_orders", strict_slashes=False)
 @login_required
 def pending_orders():
-
     orders = current_user.orders
     pending = []
+    dishes = storage.all(MenuItem).values()
     if orders:
         for order in orders:
+            OIT = order.order_items
             for order_item in order.order_items:
-                pending.append(order_item.menu)
-    return render_template("menu.html", all_orders=pending)
-
+                for dish in dishes:
+                    if dish.id == order_item.menu_item_id:
+                        pending.append(dish.name)
+    return jsonify({"pending_orders": pending})
 
 @site.route("/", strict_slashes=False)
 @site.route("/index", strict_slashes=False)
