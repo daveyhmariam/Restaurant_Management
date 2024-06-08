@@ -95,6 +95,7 @@ header {
 
 .menu-items {
     margin-top: 20px;
+    margin-left: 45px;
 }
 
 .menu-items-container {
@@ -276,25 +277,55 @@ header {
 }
 
 .orders-bar {
-    position: fixed;
+    margin-top: 30px;
+    position: absolute;
     top: 0;
-    right: -300px;
+    left: -300px;
     width: 300px;
-    height: 100vh;
-    background-color: #f9f9f9;
-    border-left: 1px solid #ccc;
-    transition: right 0.3s ease;
+    max-height: calc(100vh - 50px);
     overflow-y: auto;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ccc;
     z-index: 999;
+    transition: left 0.3s ease;
 }
 
 .orders-bar:hover {
-    right: 0;
+    left: 0;}
+
+
+
+.hover-trigger {
+    position: fixed;
+    top: 10px;
+    left: 6px;
+    transform: translateY(-50%);
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    z-index: 1000;
 }
 
-.order-item {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+
+.hover-trigger:hover {
+    background-color: #45a049;
+}
+
+.pendingOrders {
+
+    padding: 500px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .orders-bar h2 {
@@ -303,21 +334,16 @@ header {
     padding: 10px;
     margin: 0;
     font-size: 20px;
+    cursor: pointer;
+}
+
+.order-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
 .order-item:last-child {
     border-bottom: none;
-}
-
-.main-content {
-    display: flex;
-    flex: 1;
-}
-
-.side {
-    width: 200px;
-    background-color: #f0f0f0;
-    padding: 20px;
 }
 
 .content {
@@ -329,6 +355,7 @@ header {
 
 .menu-categories {
     margin-bottom: 20px;
+    margin-left: 45px;
 }
 
 .menu-items {
@@ -358,4 +385,76 @@ header {
 
 .price {
     font-weight: bold;
+}
+
+#pendingOrders {
+    color: #333; /* Dark gray text color */
+    background-color: #f0f8ff; /* Light blue background */
+    background-image: url("../images/orders.png"); /* PNG image with transparency */
+    background-repeat: repeat-y;
+    margin-top: 30px;
+    margin-left: 10px;
+    padding: 20px; /* Add some padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+#pendingOrders:hover {
+    background-color: #d3e0ea; /* Light blue background on hover */
+    color: #000; /* Black text color on hover */
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    background-color: transparent;
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav ul li {
+    position: relative;
+    margin-right: 20px;
+}
+
+.nav ul li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.nav ul li .dropbtn {
+    cursor: pointer;
+}
+
+.nav ul li .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.nav ul li .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.nav ul li .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.nav ul li:hover .dropdown-content {
+    display: block;
 }

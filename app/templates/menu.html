@@ -9,10 +9,16 @@
 <body>
     <div class="container">
         <header>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 22H22L12 2Z" fill="#000"/>
+                </svg>
+                <span>K&D Restaurant</span>
+            </div>
             <nav class="nav">
                 <ul>
-                    <li><a href="/">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <li><a href="{{ url_for('site.home') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none">
                             <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z" fill="#000"/>
                         </svg>
                         Home</a>
@@ -56,17 +62,14 @@
             </form>
         </header>
         <main class="main-content">
-            <section class="side">
-                <div class="orders-bar">
-                    <h2>Pending Orders</h2>
-                    ndfjsbvhvsfmkfgbhgsfjsfbh
-                    {% for item in all_orders %}
-                        <div id="pendingOrders">{{ item }}</div>
-                    {% endfor %}
-                </div>
-            </section>
+            <div class="orders-bar">
+                <button class="hover-trigger" onclick="getPendingOrders()">Pending Orders</button>
+                <div id="pendingOrders"></div>
+
+            </div>
             <section class="content">
                 <section class="menu-categories">
+                    
                     <h2>Categories</h2>
                     <ul>
                         {% for category in menu %}
@@ -133,5 +136,22 @@
             });
         });
     </script>
+    <script>
+        function getPendingOrders() {
+            fetch('/pending_orders')
+                .then(response => response.json())
+                .then(data => {
+                    const pendingOrdersDiv = document.getElementById('pendingOrders');
+                    pendingOrdersDiv.innerHTML = ''; // Clear previous content
+                    data.pending_orders.forEach(orderItem => {
+                        const div = document.createElement('div');
+                        div.textContent = orderItem;
+                        pendingOrdersDiv.appendChild(div);
+                    });
+                })
+                .catch(error => console.error('Error fetching pending orders:', error));
+        }
+    </script>
+
 </body>
 </html>
