@@ -41,6 +41,6 @@ class InventoryItem(BaseModel, Base):
             all_items = []
             all_i = models.storage.all(Recipe)
             for item in all_i.values():
-                if item.id == self.id:
+                if item.inventory_item_id == self.id:
                     all_items.append(item)
             return all_items

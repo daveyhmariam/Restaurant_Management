@@ -63,6 +63,6 @@ class User(BaseModel,UserMixin, Base):
             all_items = []
             all_i = models.storage.all(Order)
             for item in all_i.values():
-                if item.id == self.id:
+                if item.user_id == self.id:
                     all_items.append(item)
             return all_items

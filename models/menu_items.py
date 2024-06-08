@@ -49,7 +49,7 @@ class MenuItem(BaseModel, Base):
             all_items = []
             all_i = models.storage.all(OrderItem)
             for item in all_i.values():
-                if item.id == self.id:
+                if item.menu_item_id == self.id:
                     all_items.append(item)
             return all_items
 
@@ -60,6 +60,6 @@ class MenuItem(BaseModel, Base):
             all_items = []
             all_i = models.storage.all(Recipe)
             for item in all_i.values():
-                if item.id == self.id:
+                if item.menu_item_id == self.id:
                     all_items.append(item)
             return all_items
