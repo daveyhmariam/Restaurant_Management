@@ -35,3 +35,14 @@ Process orders received from customers and manage their status.
 Contributing
 Contributions are welcome! If you have any suggestions, feature requests, or bug reports, please open an issue or submit a pull request.
 
+
+# Requirements
+Flask==2.0.1
+SQLAlchemy==1.4.23
+Flask-SQLAlchemy==2.5.1
+mysql-connector-python==8.0.28
+WTForms==2.3.3
+Flask-Login==0.5.0
+Flask-WTF==0.15.1
+gunicorn==20.1.0
+
