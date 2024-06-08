@@ -22,7 +22,7 @@ class Role(PyEnum):
     STAFF = 'staff'
 
 
-class User(BaseModel,UserMixin, Base):
+class User(BaseModel, UserMixin, Base):
     """Defines User class and its attributes 
 
     Args:
