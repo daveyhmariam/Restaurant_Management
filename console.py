@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 from models import storage
 from models.users import User
 from models.orders import Order
-from models.order_item import OrderItem
+from models.order_items import OrderItem
 from models.menu_items import MenuItem
 from models.recipes import Recipe
 from models.inventory_items import InventoryItem
@@ -125,6 +125,7 @@ class HBNBCommand(cmd.Cmd):
         new_instance = globals()[_cls](**kwargs)
 
         print(new_instance.id)
+        storage.new(new_instance)
         storage.save()
 
     def help_create(self):
