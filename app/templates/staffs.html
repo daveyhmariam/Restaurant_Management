@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/staffs.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body>
+    <header>
+        <h1>Staff Page - All Orders</h1>
+        <form id="logout-form" action="{{ url_for('site.logout') }}" method="POST" style="display: inline;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </header>
+    <main>
+        <div class="order-list">
+            <ul class="order-container">
+                {% for order in orders['pending_orders'] %}
+                    <li class="order-item">
+                        <div class="order-details">
+                            <p class="order-name">{{ order[0] }}</p>
+                        </div>
+                        {% if order %}
+                            <form action="{{ url_for('site.complete_order') }}" method="POST">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="order_id" value="{{ order[1] }}">
+                                <button type="submit" class="complete-button">Complete</button>
+                            </form>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            function fetchOrders() {
+                fetch('{{ url_for("site.staffs") }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        const orderContainer = document.querySelector('.order-container');
+                        orderContainer.innerHTML = '';
+                        data.pending_orders.forEach(order => {
+                            const orderItem = document.createElement('li');
+                            orderItem.className = 'order-item';
+
+                            const orderDetails = document.createElement('div');
+                            orderDetails.className = 'order-details';
+                            const orderName = document.createElement('p');
+                            orderName.className = 'order-name';
+                            orderName.textContent = order[0];
+                            orderDetails.appendChild(orderName);
+
+                            const form = document.createElement('form');
+                            form.action = '{{ url_for("site.complete_order") }}';
+                            form.method = 'POST';
+
+                            const csrfInput = document.createElement('input');
+                            csrfInput.type = 'hidden';
+                            csrfInput.name = 'csrf_token';
+                            csrfInput.value = csrfToken;
+
+                            const input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = 'order_id';
+                            input.value = order[1];
+                            form.appendChild(csrfInput);
+                            form.appendChild(input);
+
+                            const button = document.createElement('button');
+                            button.type = 'submit';
+                            button.className = 'complete-button';
+                            button.textContent = 'Complete';
+                            form.appendChild(button);
+
+                            orderItem.appendChild(orderDetails);
+                            orderItem.appendChild(form);
+                            orderContainer.appendChild(orderItem);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching orders:', error));
+            }
+
+            // Fetch orders every 10 seconds
+            setInterval(fetchOrders, 10000);
+        });
+    </script>
+</body>
+</html>
