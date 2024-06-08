@@ -1,0 +1,147 @@
+{
+    "menus": [
+      {
+        "name": "Burger",
+        "description": "Classic beef burger with cheese, lettuce, and tomato",
+        "price": 8.99,
+        "category": "Main Course",
+        "recipes": [
+          {
+            "ingredient": "Beef Patty",
+            "quantity": 1,
+            "unit": "pcs"
+          },
+          {
+            "ingredient": "Cheese",
+            "quantity": 1,
+            "unit": "slice"
+          },
+          {
+            "ingredient": "Lettuce",
+            "quantity": 1,
+            "unit": "leaf"
+          },
+          {
+            "ingredient": "Tomato",
+            "quantity": 2,
+            "unit": "slice"
+          }
+        ]
+      },
+
+      {
+        "name": "Pizza",
+        "description": "Pepperoni pizza with mozzarella cheese and tomato sauce",
+        "price": 10.99,
+        "category": "Main Course",
+        "recipes": [
+          {
+            "ingredient": "Pizza Dough",
+            "quantity": 1,
+            "unit": "portion"
+          },
+          {
+            "ingredient": "Pepperoni",
+            "quantity": 10,
+            "unit": "slices"
+          },
+          {
+            "ingredient": "Mozzarella Cheese",
+            "quantity": 100,
+            "unit": "grams"
+          },
+          {
+            "ingredient": "Tomato Sauce",
+            "quantity": 2,
+            "unit": "spoonfuls"
+          }
+        ]
+
+      },
+      {
+        "name": "Salad",
+        "description": "Fresh garden salad with mixed greens, tomatoes, cucumbers, and vinaigrette dressing",
+        "price": 6.99,
+        "category": "Appetizer",
+        "recipes": [
+          {
+            "ingredient": "Mixed Greens",
+            "quantity": 100,
+            "unit": "grams"
+          },
+          {
+            "ingredient": "Tomato",
+            "quantity": 1,
+            "unit": "slice"
+          },
+          {
+            "ingredient": "Cucumber",
+            "quantity": 1,
+            "unit": "slice"
+          },
+          {
+            "ingredient": "Vinaigrette Dressing",
+            "quantity": 2,
+            "unit": "spoonfuls"
+          }
+        ]
+      } 
+    ],
+"inventory": [
+    {
+      "name": "Beef Patty",
+      "quantity": 50,
+      "unit": "pcs"
+    },
+    {
+      "name": "Cheese",
+      "quantity": 100,
+      "unit": "slices"
+    },
+    {
+      "name": "Lettuce",
+      "quantity": 20,
+      "unit": "leaves"
+    },
+    {
+      "name": "Tomato",
+      "quantity": 30,
+      "unit": "slices"
+    },
+    {
+      "name": "Pizza Dough",
+      "quantity": 15,
+      "unit": "portions"
+    },
+    {
+      "name": "Pepperoni",
+      "quantity": 20,
+      "unit": "slices"
+    },
+    {
+      "name": "Mozzarella Cheese",
+      "quantity": 150,
+      "unit": "grams"
+    },
+    {
+      "name": "Tomato Sauce",
+      "quantity": 5,
+      "unit": "spoonfuls"
+    },
+    {
+      "name": "Mixed Greens",
+      "quantity": 200,
+      "unit": "grams"
+    },
+    {
+      "name": "Cucumber",
+      "quantity": 2,
+      "unit": "slices"
+    },
+    {
+      "name": "Vinaigrette Dressing",
+      "quantity": 10,
+      "unit": "spoonfuls"
+    }
+  ]
+}
