@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../static/styles/menu.css">
 </head>
 <body>
-
     <div class="container">
         <header>
             <nav class="nav">
@@ -25,7 +24,7 @@
                             </svg>
                             Menu</a>
                         <div class="dropdown-content">
-                            <a href="/menu/appetizers">Appetizers</a>
+                            <a href="/menu/#Fastfood">Appetizers</a>
                             <a href="/menu/main_courses">Main Courses</a>
                             <a href="/menu/desserts">Desserts</a>
                             <a href="/menu/beverages">Beverages</a>
@@ -52,45 +51,51 @@
                     </li>
                 </ul>
             </nav>
-            
             <form method="post" action="/logout" class="logout-form">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             </form>
         </header>
-
-        <main>
-            <section class="menu-categories">
-                <h2>Categories</h2>
-                <ul>
-                    {% for category in menu %}
-                    <li><a href="#{{ category }}">{{ category }}</a></li>
-                    {% endfor %}
-                </ul>
-            </section>
-
-            <section class="menu-items">
-                {% for category, dishes in menu.items() %}
-                <h2 id="{{ category }}">{{ category }}</h2>
-                <div class="menu-items-container">
-                    {% for dish in dishes %}
-                    <div class="menu-item">
-                        <input type="checkbox" id="dish{{ dish.id }}" name="dish" value="{{ dish.id }}">
-                        <label for="dish{{ dish.id }}">{{ dish.name }}</label>
-                        <img src="../static/images/{{ dish.picture }}" alt="{{ dish.name }}">
-                        <p>{{ dish.description }}</p>
-                        <p>Price: {{ dish.price }}</p>
-                    </div>
+        <main class="main-content">
+            <section class="side">
+                <div class="orders-bar">
+                    <h2>Pending Orders</h2>
+                    ndfjsbvhvsfmkfgbhgsfjsfbh
+                    {% for item in all_orders %}
+                        <div id="pendingOrders">{{ item }}</div>
                     {% endfor %}
                 </div>
-                {% endfor %}
-                <meta name="csrf-token" content="{{ csrf_token() }}">
-                <button id="orderButton">Order</button>
-                <div id="noDishSelectedMessage">Please select at least one dish.</div>
+            </section>
+            <section class="content">
+                <section class="menu-categories">
+                    <h2>Categories</h2>
+                    <ul>
+                        {% for category in menu %}
+                            <li><a href="#{{ category }}">{{ category }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                <section class="menu-items">
+                    {% for category, dishes in menu.items() %}
+                        <h2 id="{{ category }}">{{ category }}</h2>
+                        <div class="menu-items-container">
+                            {% for dish in dishes %}
+                                <div class="menu-item">
+                                    <input type="checkbox" id="dish{{ dish.id }}" name="dish" value="{{ dish.id }}">
+                                    <label for="dish{{ dish.id }}">{{ dish.name }}</label>
+                                    <img src="../static/images/{{ dish.picture }}" alt="{{ dish.name }}">
+                                    <p>{{ dish.description }}</p>
+                                    <p class="price">Price: {{ dish.price }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <meta name="csrf-token" content="{{ csrf_token() }}">
+                    <button id="orderButton">Order</button>
+                    <div id="noDishSelectedMessage">Please select at least one dish.</div>
+                </section>
             </section>
         </main>
-
     </div>
-
     <script>
         document.getElementById("orderButton").addEventListener("click", function() {
             var selectedDishes = [];
@@ -98,41 +103,35 @@
             checkboxes.forEach(function(checkbox) {
                 selectedDishes.push(checkbox.value);
             });
-            
             if (selectedDishes.length === 0) {
                 var message = document.getElementById("noDishSelectedMessage");
-                message.style.display = "block";
+                message.style.display = "inline";
                 setTimeout(function() {
                     message.style.display = "none";
-                }, 2000);
+                }, 4000);
                 return;
             }
-            
-            // Fetch CSRF token from the meta tag
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
             fetch('/place_order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken  // Include CSRF token in the headers
+                    'X-CSRFToken': csrfToken
                 },
                 body: JSON.stringify({ selectedDishes: selectedDishes })
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.message); // For example, show a success message
-                // Uncheck all checkboxes
+                alert(data.message);
                 checkboxes.forEach(function(checkbox) {
                     checkbox.checked = false;
                 });
             })
             .catch(error => {
                 console.error('Error:', error);
+                alert('An error occurred while placing your order. Please try again.');
             });
         });
     </script>
-    
-    
 </body>
 </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K&D Restaurant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 22H22L12 2Z" fill="#000"/>
+                </svg>
+                <span>K&D Restaurant</span>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li class="login"><a href="{{ url_for('site.login') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="16" height="16" fill="white">
+                            <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 18.33c-4.6 0-8.33-3.73-8.33-8.33S5.4 1.67 10 1.67 18.33 5.4 18.33 10 14.6 18.33 10 18.33zM10 3.67c-3.5 0-6.33 2.83-6.33 6.33S6.5 16.33 10 16.33 16.33 13.5 16.33 10 13.5 3.67 10 3.67zm0 10c-2.03 0-3.67-1.64-3.67-3.67S7.97 6.33 10 6.33s3.67 1.64 3.67 3.67S12.03 13.67 10 13.67z"/>
+                        </svg> 
+                        Login</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="login">
+            <div class="login-form">
+                <h2>Login</h2>
+                <form method="POST" action="{{ url_for('site.login') }}">
+                    {{ form.hidden_tag() }}
+                    <label for="email">Email:</label>
+                    {{ form.email(class="email-field") }}<br>
+                    <label for="password">Password:</label>
+                    {{ form.password }}<br>
+                    {{ form.csrf_token }}
+                    <button type="submit" class="button">Login</button>
+                    {% if error %}
+                        <p style="color:red;">{{ error }}</p>
+                    {% endif %}
+                    <p>You don't have an account? <a class="login" href="{{ url_for('site.register') }}">Register</a></p>
+                </form>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <section class="contact">
+                <div class="content-wrapper">
+                    <h2><a href="https://www.github.com/daveyhmariam" target="_blank">Contact Us</a></h2>
+                    <p>If you have any questions or inquiries, feel free to reach out to us.</p>
+                    <p>&copy; K&D Restaurant</p>
+                </div>
+            </section>
+        </footer>
+    </div>
+</body>
+</html>

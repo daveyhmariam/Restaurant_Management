@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K&D Restaurant - Register</title>
+    <link rel="stylesheet" href="../static/styles/register.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 22H22L12 2Z" fill="#000"/>
+                </svg>
+                <span>K&D Restaurant</span>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li class="login"><a href="{{ url_for('site.login') }}">Login</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="main-content">
+        <section class="register">
+            <div class="register-form-container">
+                <div class="register-form">
+                    <h2>Register</h2>
+                <form method="POST" action="{{ url_for('site.register') }}">
+                    {{ form.hidden_tag() }}
+                    <label for="email">Email:</label>
+                    {{ form.email(class="email-field") }}<br>
+                    <label for="password">Password:</label>
+                    {{ form.password }}<br>
+                    <label for="first_name">First Name:</label>
+                    {{ form.first_name(class="first_name") }}<br>
+                    <label for="last_name">Last Name:</label>
+                    {{ form.last_name(class="last_name") }}<br>
+                    {{ form.csrf_token }}
+                    <button type="submit" class="button">Register</button>                    {% if form.errors %}
+                        <ul>
+                        {% for field, errors in form.errors.items() %}
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <p>Already have an account? <a class="login" href="{{ url_for('site.login') }}">Login</a></p>
+        
+                </form>
+            </div>
+        </div>
+    </section>
+    </main>
+    </div>
+        <footer class="footer">
+            <section class="contact">
+                <div class="content-wrapper">
+                    <h2><a href="https://www.github.com/daveyhmariam" target="_blank">Contact Us</a></h2>
+                    <p>If you have any questions or inquiries, feel free to reach out to us.</p>
+                    <p>&copy; K&D Restaurant</p>
+                </div>
+            </section>
+        </footer>
+    </div>
+</body>
+</html>
