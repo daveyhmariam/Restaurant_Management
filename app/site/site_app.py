@@ -11,6 +11,8 @@ from models.orders import Order, Status
 from models.order_items import OrderItem
 from models import storage
 from app import bcrypt
+from models.users import Role
+from models.orders import Status
 
 
 class RegisterForm(FlaskForm):
@@ -49,7 +51,12 @@ def login():
                                                 password=form.password.data)):
 
             login_user(user)
+            if user.role == Role.STAFF:
+                return redirect(url_for('site.staffs'))
             return redirect(url_for('site.home'))
+
+    if current_user.is_authenticated and current_user.role == Role.STAFF:
+        return redirect(url_for('site.staffs'))
 
     return render_template('login.html', form=form)
 
@@ -150,6 +157,53 @@ def pending_orders():
                     if dish.id == order_item.menu_item_id:
                         pending.append(dish.name)
     return jsonify({"pending_orders": pending})
+
+
+@site.route('/staffs', methods=['GET'])
+@login_required
+def staffs():
+    if current_user.role == Role.STAFF:
+        orders = storage.all(Order).values()
+        pending = []
+        dishes = storage.all(MenuItem).values()
+        if orders:
+            for order in orders:
+                OIT = order.order_items
+                for order_item in order.order_items:
+                    for dish in dishes:
+                        aux = []
+                        if dish.id == order_item.menu_item_id:
+                            aux.append(dish.name)
+                            aux.append(order_item.id)
+                        if aux:
+                            pending.append(aux)
+        if request.is_json:
+            return jsonify({"pending_orders": pending})
+        else:
+            return render_template("staffs.html", orders={"pending_orders": pending})
+    else:
+        return jsonify({'error': "Access Denied"}), 403
+
+
+@site.route('/complete_order', methods=['POST'])
+@login_required
+def complete_order():
+    if current_user.role == Role.STAFF:
+        data = request.form.get('order_id')
+        if data:
+            orderI = storage.all(OrderItem).values()
+            for order in orderI:
+                if order.id == data:
+                    storage.delete(order)
+                    break
+        all_orders = storage.all(Order).values()    
+        for order in all_orders:
+            if order.order_items == []:
+                order.status = Status.COMPLETED
+        return redirect(url_for('site.staffs'))
+    else:
+        return jsonify({'error': "Access Denied"}), 403
+
 
 @site.route("/", strict_slashes=False)
 @site.route("/index", strict_slashes=False)
