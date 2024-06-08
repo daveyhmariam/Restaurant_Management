@@ -6,6 +6,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, TEXT, DECIMAL
 from sqlalchemy.orm import relationship
 from models.recipes import Recipe
+from os import getenv
 
 
 class InventoryItem(BaseModel, Base):
@@ -15,11 +16,31 @@ class InventoryItem(BaseModel, Base):
         BaseModel (class): the base model class
         Base (class): ORM base class
     """
-    __tablename__ = "inventory_items"
+    if getenv("TYPE_STORAGE") == 'db':
 
-    name = Column(String(128), nullable=False, unique=True)
-    quantity = Column(DECIMAL(10, 2), nullable=False)
-    unit = Column(String(60), nullable=False)
-    recipes = relationship('Recipe',
-                           backref='inventory_item',
-                           cascade="all, delete, delete-orphan")
+        __tablename__ = "inventory_items"
+
+        name = Column(String(128), nullable=False, unique=True)
+        quantity = Column(DECIMAL(10, 2), nullable=False)
+        unit = Column(String(60), nullable=False)
+        recipes = relationship('Recipe',
+                            backref='inventory_item',
+                            cascade="all, delete, delete-orphan")
+    else:
+        name = Column(String(128), nullable=False, unique=True)
+        quantity = Column(DECIMAL(10, 2), nullable=False)
+        unit = Column(String(60), nullable=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    if getenv("TYPE_STORAGE") == 'db':
+        @property
+        def recipes(self):
+
+            all_items = []
+            all_i = models.storage.all(Recipe)
+            for item in all_i.values():
+                if item.id == self.id:
+                    all_items.append(item)
+            return all_items
