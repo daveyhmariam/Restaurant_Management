@@ -1,6 +1,6 @@
-CREATE USER 'dev'@'localhost' IDENTIFIED BY 'Daveyhmdave123L';
+CREATE USER 'hbnb_dev'@'localhost' IDENTIFIED BY 'daveyhmdave';
 
-GRANT ALL PRIVILEGES ON *.* TO 'dev'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'hbnb_dev'@'localhost';
 
 FLUSH PRIVILEGES;
 
