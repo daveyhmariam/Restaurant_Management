@@ -8,3 +8,6 @@ Flask-WTF==0.15.1
 gunicorn==20.1.0
 flask-bcrypt
 flask flask-login
+Flask-WTF
+python-dotenv
+flask-cors
