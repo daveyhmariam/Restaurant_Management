@@ -37,7 +37,6 @@
                     {{ form.email(class="email-field") }}<br>
                     <label for="password">Password:</label>
                     {{ form.password }}<br>
-                    {{ form.csrf_token }}
                     <button type="submit" class="button">Login</button>
                     {% if error %}
                         <p style="color:red;">{{ error }}</p>
