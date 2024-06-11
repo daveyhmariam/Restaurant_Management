@@ -1,0 +1,59 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VTIMEZONE
+TZID:Africa/Nairobi
+X-LIC-LOCATION:Africa/Nairobi
+BEGIN:STANDARD
+TZOFFSETFROM:+0300
+TZOFFSETTO:+0300
+TZNAME:EAT
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=Africa/Nairobi:20240612T213000
+DTEND;TZID=Africa/Nairobi:20240612T214800
+DTSTAMP:20240609T234430Z
+ORGANIZER;CN=James Mutua:mailto:mutuajamesnzioka@gmail.com
+UID:pup00502h0ur12ftqdqt3u3qmc@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
+ TRUE;CN=daveyhmariam@gmail.com;X-NUM-GUESTS=0:mailto:daveyhmariam@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE
+ ;CN=James Mutua;X-NUM-GUESTS=0:mailto:mutuajamesnzioka@gmail.com
+X-GOOGLE-CONFERENCE:https://meet.google.com/mdq-axeq-xjg
+X-MICROSOFT-CDO-OWNERAPPTID:1127405687
+CREATED:20240609T234428Z
+DESCRIPTION:Event Name: Portfolio Project Review\n\nDear software engineer\
+ ,\n\nCongratulations on finalizing your portfolio project\n\nTo be reviewed
+  your team needs the correction link. You will find it after you ask for a 
+ new correction on the page above ☝️ It looks like this:\n\nhttps://intranet
+ .alxswe.com/corrections/9999999999/correct\n\nThe meeting is scheduled for 
+ 18 minutes.\n\n- 2m setup\n\n- 8m for presentation\n\n- 8m for questions\n\
+ nOn the booking page\, provide the email address you use to sign in to the 
+ intranet\, and add your team members as guests. \n\n\nLocation: This is a G
+ oogle Meet web conference.\nYou can join this meeting from your computer\, 
+ tablet\, or smartphone.\nhttps://calendly.com/events/68e3d7c0-dbba-4eec-9ed
+ b-254be12a8e46/google_meet\n\nProject Title: Restaurant Management\n\nProje
+ ct Description: The Restaurant Management project aims to develop a softwar
+ e solution tailored to streamline and optimize various aspects of restauran
+ t operations.\n\nLink to Correction: https://intranet.alxswe.com/correction
+ s/34013799/correct\n\nNeed to make changes to this event?\nCancel: https://
+ calendly.com/cancellations/0b79d045-238d-4428-9a39-5fe4aa492454\nReschedule
+ : https://calendly.com/reschedulings/0b79d045-238d-4428-9a39-5fe4aa492454\n
+ \nPowered by Calendly.com\n\n\n-::~:~::~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:
+ ~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-\nJoin with Google Meet: https:/
+ /meet.google.com/mdq-axeq-xjg\n\nLearn more about Meet at: https://support.
+ google.com/a/users/answer/9282720\n\nPlease do not edit this section.\n-::~
+ :~::~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~
+ ::~:~::-
+LAST-MODIFIED:20240609T234428Z
+LOCATION:Google Meet (instructions in description)
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dawit Yilma Habtemariam and James Mutua
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR
