@@ -3,6 +3,8 @@ from app import create_app
 from flask_cors import CORS
 from flask import make_response, jsonify
 from flasgger import Swagger
+from werkzeug.middleware.proxy_fix import ProxyFix
+from flask_session import Session
 
 
 # Create the Flask application
@@ -16,14 +18,20 @@ app.config['SWAGGER'] = {
     'uiversion': 3
 }
 
-app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_SECURE'] = False
+app.config['CSRF_COOKIE_SECURE'] = False
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['REMEMBER_COOKIE_SECURE'] = True
 app.config['REMEMBER_COOKIE_HTTPONLY'] = True
 from datetime import timedelta
 
 app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=1)  
+app.config['WTF_CSRF_ENABLED'] = True
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1)
+
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
 Swagger(app)
 
