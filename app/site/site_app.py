@@ -204,6 +204,10 @@ def complete_order():
     else:
         return jsonify({'error': "Access Denied"}), 403
 
+@site.route("/about", strict_slashes=False)
+@login_required
+def about():
+    return render_template("about.html")
 
 @site.route("/", strict_slashes=False)
 @site.route("/index", strict_slashes=False)
