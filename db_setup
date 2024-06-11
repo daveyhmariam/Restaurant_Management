@@ -1,4 +1,4 @@
-CREATE USER 'hbnb_dev'@'localhost' IDENTIFIED BY 'daveyhmdave';
+CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'daveyhmdave';
 
 GRANT ALL PRIVILEGES ON *.* TO 'hbnb_dev'@'localhost';
 
