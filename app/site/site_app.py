@@ -13,6 +13,7 @@ from models import storage
 from app import bcrypt
 from models.users import Role
 from models.orders import Status
+from models.inventory_items import InventoryItem
 
 
 class RegisterForm(FlaskForm):
@@ -53,10 +54,15 @@ def login():
             login_user(user)
             if user.role == Role.STAFF:
                 return redirect(url_for('site.staffs'))
+            if user.role == Role.ADMIN:
+                return redirect(url_for('site.admin'))
             return redirect(url_for('site.home'))
 
     if current_user.is_authenticated and current_user.role == Role.STAFF:
         return redirect(url_for('site.staffs'))
+
+    if current_user.is_authenticated and current_user.role == Role.ADMIN:
+        return redirect(url_for('site.admin'))
 
     return render_template('login.html', form=form)
 
@@ -194,8 +200,13 @@ def complete_order():
             orderI = storage.all(OrderItem).values()
             for order in orderI:
                 if order.id == data:
+                    menu_id = order.menu_item_id
+                    recipes = storage.get(MenuItem, menu_id).recipes
+                    for recipe in recipes:
+                        inv = storage.get(InventoryItem, recipe.inventory_item_id)
+                        inv.quantity -= recipe.quantity
                     storage.delete(order)
-                    break
+
         all_orders = storage.all(Order).values()    
         for order in all_orders:
             if order.order_items == []:
@@ -203,6 +214,52 @@ def complete_order():
         return redirect(url_for('site.staffs'))
     else:
         return jsonify({'error': "Access Denied"}), 403
+
+
+
+@site.route('/admin', methods=['GET'])
+@login_required
+def admin():
+    if current_user.role == Role.ADMIN:
+        inventory = storage.all(InventoryItem).values()
+        all_inventory = []
+        dishes = storage.all(MenuItem).values()
+        if inventory:
+            for inv in inventory:
+                aux = []
+                aux.append(inv.name)
+                aux.append(inv.quantity)
+                aux.append(inv.unit)
+                aux.append(inv.id)
+                if aux:
+                    all_inventory.append(aux)
+    
+        if request.is_json:
+            return jsonify({"all": all_inventory})
+        else:
+            return render_template("inventory.html", inventories={"all": all_inventory})
+    else:
+        return jsonify({'error': "Access Denied"}), 403
+
+
+@site.route('/add_inventory', methods=['POST'], strict_slashes=False)
+@login_required
+def add_inventory():
+    print("hearedjkfbvj")
+    if current_user.role == Role.ADMIN:
+        data = request.form.to_dict()
+        print(data)
+        if data:
+            inv = storage.get(InventoryItem, data["inventory_id"])
+            if inv:
+                inv.quantity += eval(data['quantity'])
+                storage.update(inv)
+        storage.save()
+
+        return redirect(url_for('site.admin'))
+    else:
+        return jsonify({'error': "Access Denied"}), 403
+
 
 @site.route("/about", strict_slashes=False)
 @login_required
