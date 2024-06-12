@@ -9,11 +9,12 @@ from models.inventory_items import InventoryItem
 from models.recipes import Recipe
 from sqlalchemy.exc import IntegrityError
 import json
+import sys
 
 
 if  __name__ == "__main__":
 
-    with open("/home/dave/alx_2/Restaurant_Management/mock_data4.json", 'r') as file:
+    with open("/home/dave/alx_2/Restaurant_Management/{}".format(sys.argv[1]), 'r') as file:
         data = json.load(file)
         inventory = data["inventory"]
 
