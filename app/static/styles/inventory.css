@@ -1,0 +1,142 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header styles */
+header {
+    background-color:#000000;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0.8;
+}
+
+header h1 {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+/* Main container styles */
+.inventory-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 20px;
+}
+
+/* Inventory container styles */
+.inventory-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+/* Inventory item styles */
+.inventory-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.inventory-item:hover {
+    transform: scale(1.02);
+    background-color: #f1f1f1;
+}
+
+/* Inventory details styles */
+.inventory-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.inventory-name, .inventory-quantity, .inventory-location {
+    margin: 5px 0;
+}
+
+/* Button styles */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.add-button:hover {
+    background-color: #218838;
+}
+
+.logout-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+/* Quantity input styles */
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Main styles */
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Inventory list styles */
+.inventory-list {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Inventory container styles */
+.inventory-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}

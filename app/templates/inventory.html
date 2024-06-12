@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/inventory.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body>
+    <header>
+        <h1>Admin Page - All Inventory</h1>
+        <form id="logout-form" action="{{ url_for('site.logout') }}" method="POST" style="display: inline;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </header>
+    <main>
+        <div class="inventory-list">
+            <ul class="inventory-container">
+                {% for inventory in inventories['all'] %}
+                    <li class="inventory-item">
+                        <div class="inventory-details">
+                            <p class="inventory-name">{{ inventory[0] }}</p>
+                            <p class="inventory-quantity">{{ inventory[1] }}</p>
+                            <p class="inventory-location">{{ inventory[2] }}</p>
+                        </div>
+                        <form method="POST" action={{ url_for('site.add_inventory') }}>
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="inventory_id" value="{{ inventory[3] }}">
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" class="quantity" name="quantity" value="">
+                            <button type="submit" class="add-button">Add</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const baseUrl = "{{ url_for('site.add_inventory') }}";
+
+            function fetchInventory() {
+                fetch('{{ url_for("site.admin") }}', {
+                    headers: {
+                        'X-CSRFToken': csrfToken
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const inventoryContainer = document.querySelector('.inventory-container');
+                    inventoryContainer.innerHTML = '';
+                    data.inventories.forEach(inventory => {
+                        const inventoryItem = document.createElement('li');
+                        inventoryItem.className = 'inventory-item';
+
+                        const inventoryDetails = document.createElement('div');
+                        inventoryDetails.className = 'inventory-details';
+
+                        const inventoryName = document.createElement('p');
+                        inventoryName.className = 'inventory-name';
+                        inventoryName.textContent = inventory[0];
+                        inventoryDetails.appendChild(inventoryName);
+
+                        const inventoryQuantity = document.createElement('p');
+                        inventoryQuantity.className = 'inventory-quantity';
+                        inventoryQuantity.textContent = inventory[1];
+                        inventoryDetails.appendChild(inventoryQuantity);
+
+                        const inventoryLocation = document.createElement('p');
+                        inventoryLocation.className = 'inventory-location';
+                        inventoryLocation.textContent = inventory[2];
+                        inventoryDetails.appendChild(inventoryLocation);
+
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+
+                        const csrfInput = document.createElement('input');
+                        csrfInput.type = 'hidden';
+                        csrfInput.name = 'csrf_token';
+                        csrfInput.value = csrfToken;
+
+                        const inventoryIdInput = document.createElement('input');
+                        inventoryIdInput.type = 'hidden';
+                        inventoryIdInput.name = 'inventory_id';
+                        inventoryIdInput.value = inventory[3];
+
+                        const quantityLabel = document.createElement('label');
+                        quantityLabel.htmlFor = 'quantity';
+                        quantityLabel.textContent = 'Quantity:';
+
+                        const quantityInput = document.createElement('input');
+                        quantityInput.type = 'number';
+                        quantityInput.className = 'quantity';
+                        quantityInput.name = 'quantity';
+                        quantityInput.value = '';
+
+                        const button = document.createElement('button');
+                        button.type = 'submit';
+                        button.className = 'add-button';
+                        button.textContent = 'Add';
+
+                        form.appendChild(csrfInput);
+                        form.appendChild(inventoryIdInput);
+                        form.appendChild(quantityLabel);
+                        form.appendChild(quantityInput);
+                        form.appendChild(button);
+
+                        inventoryItem.appendChild(inventoryDetails);
+                        inventoryItem.appendChild(form);
+                        inventoryContainer.appendChild(inventoryItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching inventory:', error));
+            }
+
+            // Fetch inventory every 10 seconds
+            setInterval(fetchInventory, 10000);
+            fetchInventory(); // Initial fetch when the page loads
+        });
+    </script>
+</body>
+</html>
