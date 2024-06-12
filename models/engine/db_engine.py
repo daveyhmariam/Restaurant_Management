@@ -69,6 +69,17 @@ class DB_Storage():
         """
         self.__session.add(obj)
 
+
+
+    def update(self, obj):
+        """
+        Update the state of the given object within the session.
+        
+        Args:
+            obj (object): Object to update within the session.
+        """
+        self.__session.merge(obj)
+
     def save(self):
         """
         Commit changes to table
@@ -85,6 +96,7 @@ class DB_Storage():
         """
         if obj:
             self.__session.delete(obj)
+            self.__session.commit()
 
     def reload(self):
         """
