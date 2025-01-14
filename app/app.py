@@ -19,7 +19,7 @@ app.config['SWAGGER'] = {
 }
 
 app.config['SESSION_COOKIE_SECURE'] = False
-app.config['CSRF_COOKIE_SECURE'] = False
+app.config['CSRF_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['REMEMBER_COOKIE_SECURE'] = True
 app.config['REMEMBER_COOKIE_HTTPONLY'] = True
