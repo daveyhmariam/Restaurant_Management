@@ -100,7 +100,7 @@ def logout():
 
 
 @site.route("/menu", strict_slashes=False)
-@login_required
+#@login_required
 def menu():
     menu_items = storage.all(MenuItem)
 
@@ -273,6 +273,6 @@ def index():
 
 
 @site.route("/home", strict_slashes=False)
-@login_required
+#@login_required
 def home():
     return render_template("home.html")
