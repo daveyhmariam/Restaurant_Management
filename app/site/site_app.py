@@ -273,6 +273,6 @@ def index():
 
 
 @site.route("/home", strict_slashes=False)
-#@login_required
+@login_required
 def home():
     return render_template("home.html")
