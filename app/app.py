@@ -26,7 +26,7 @@ app.config['REMEMBER_COOKIE_HTTPONLY'] = True
 from datetime import timedelta
 
 app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=1)  
-app.config['WTF_CSRF_ENABLED'] = True
+app.config['WTF_CSRF_ENABLED'] = False
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1)
 
