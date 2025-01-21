@@ -5,13 +5,13 @@ from flask import make_response, jsonify
 from flasgger import Swagger
 from werkzeug.middleware.proxy_fix import ProxyFix
 from flask_session import Session
-
+import secrets
 
 # Create the Flask application
 app = create_app()
 
 # Set the secret key and other configurations
-
+app.config['SECRET_KEY'] = secrets.token_hex(32)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.config['SWAGGER'] = {
     'title': 'Restaurant Management Portfolio Project Restful API',
