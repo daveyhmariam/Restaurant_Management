@@ -36,8 +36,8 @@
                     {{ form.first_name(class="first_name") }}<br>
                     <label for="last_name">Last Name:</label>
                     {{ form.last_name(class="last_name") }}<br>
-                    {{ form.csrf_token }}
-                    <button type="submit" class="button">Register</button>                    {% if form.errors %}
+                    <button type="submit" class="button">Register</button>
+                    {% if form.errors %}
                         <ul>
                         {% for field, errors in form.errors.items() %}
                             {% for error in errors %}
